@@ -1,0 +1,14 @@
+@(elements: helper.FieldElements)
+
+@*
+* Generate input according twitter bootstrap 2.0 rules.
+*@
+<div class="control-group @if(elements.hasErrors) {error}">
+    <label class="control-label" for="@elements.id">@elements.label</label>
+    <div class="controls">
+        @elements.input
+        @if(elements.hasErrors) {
+        <p class="error">@elements.errors.mkString(", ")</p>
+        }
+    </div>
+</div>

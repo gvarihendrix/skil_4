@@ -1,0 +1,31 @@
+@(loginForm: Form[is.ru.honn.rupin.domain.Login])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(title="Innskráning") {
+@form(action = routes.Application.authenticate(), 'class -> "form-signin") {
+    @if(loginForm.hasGlobalErrors) {
+    <p class="error">
+        <span class="label important">@loginForm.globalError.message</span>
+    </p>
+    }
+    <h2>@Messages("login")</h2>
+    <fieldset>
+        @inputText(
+            loginForm("email"),
+            '_label -> null,
+            'placeholder -> Messages("email"),
+            'class -> "input-block-level"
+        )
+        @inputPassword(
+            loginForm("password"),
+            '_label -> null,
+            'placeholder -> Messages("password"),
+            'class -> "input-block-level"
+        )
+    </fieldset>
+    <input type="submit" class="btn btn-large btn-primary" value="@Messages("login.login")" />
+    <small><a href="@routes.Application.forgotpassword">@Messages("forgot.password")</a></small>
+}
+}

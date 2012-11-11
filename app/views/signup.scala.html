@@ -1,0 +1,53 @@
+@(signupForm: Form[is.ru.honn.rupin.domain.UserRegistration])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(title="Innskráning") {
+@form(action = routes.Application.submitSignUp(), 'class -> "form-signin") {
+@if(signupForm.hasGlobalErrors) {
+<p class="error">
+    <span class="label important">@signupForm.globalError.message</span>
+</p>
+}
+<h2>@Messages("signup")</h2>
+<fieldset>
+    @inputText(
+    signupForm("fullname"),
+    '_label -> Messages("fullname"),
+    'placeholder -> Messages("fullname"),
+    'class -> "input-block-level"
+    )
+    @inputText(
+    signupForm("email"),
+    '_label -> Messages("email"),
+    'placeholder -> Messages("email"),
+    'class -> "input-block-level"
+    )
+    @inputPassword(
+    signupForm("password"),
+    '_label -> Messages("password"),
+    'placeholder -> Messages("password"),
+    'class -> "input-block-level"
+    )
+    @inputPassword(
+    signupForm("repeatPassword"),
+    '_label -> Messages("repeatPassword"),
+    'placeholder -> Messages("repeatPassword"),
+    'class -> "input-block-level"
+    )
+    @checkbox(
+    signupForm("accept"),
+    '_label -> "You agree the Terms and conditions",
+    '_showConstraints -> false
+    )
+</fieldset>
+
+<div class="control-group">
+    <div class="controls">
+        <input type="submit" class="btn btn-large btn-primary" value="@Messages("signup.signup")"/>
+    </div>
+</div>
+
+}
+}
