@@ -1,7 +1,14 @@
-@(message: String)
-
-@main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message, style = "Java")
-    
+@main(title="Forsíða") {
+<div class="hero-unit">
+    <h1>Welcome to RuPin!</h1>
+    <p>
+        Test it
+    </p>
+    <p>
+        <a class="btn btn-primary btn-large" href="@routes.Application.login">@Messages("login")</a>
+        <a class="btn btn-success btn-large" href="@routes.Application.signUp">@Messages("signup")</a>
+    </p>
+    <p>
+    </p>
+</div>
 }

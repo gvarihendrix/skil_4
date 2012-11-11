@@ -1,0 +1,12 @@
+email = Email
+password = Password
+forgot.password = Forgot Password
+login = Login
+login.login = Log In
+fullname = Full name
+signup = Signup
+signup.signup = Sign Up
+repeatPassword = Repeat Password
+logout = Log out
+settings = Settings
+Home = Home
