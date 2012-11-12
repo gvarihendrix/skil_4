@@ -1,7 +1,6 @@
 package is.ru.honn.rupin.domain;
 
-
-import is.ru.honn.rupin.data.UserDataGateway;
+import is.ru.honn.rupin.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import play.data.format.Formats;
@@ -34,9 +33,9 @@ public class Login {
     public String validate() {
         ApplicationContext dbctx = new
                 FileSystemXmlApplicationContext("/conf/ApplicationContext.xml");
-        UserDataGateway userDataGateway = (UserDataGateway)dbctx.getBean("userDataGateway");
+        UserService userServiceData =  (UserService)dbctx.getBean("userService");
 
-        if (userDataGateway.authenticate(email,password) != null) return null;
+        if (userServiceData.authenticate(email,password) != null) return null;
         return "Invalid user or Password";
     }
 

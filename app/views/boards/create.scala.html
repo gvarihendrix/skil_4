@@ -1,0 +1,39 @@
+@(user: is.ru.honn.rupin.domain.User, boardForm: Form[is.ru.honn.rupin.domain.Board])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(title = Messages("title.board.create"), user) {
+<div class="row">
+<div class="span6">
+@form(action = routes.Boards.submitCreate(), 'class -> "form-horizontal") {
+@if(boardForm.hasGlobalErrors) {
+<p class="error">
+    <span class="label important">@boardForm.globalError.message</span>
+</p>
+}
+<h2>@Messages("create.a.board")</h2>
+<fieldset>
+    @inputText(
+        boardForm("name"),
+        '_label -> Messages("Board.Name"),
+        'placeholder -> Messages("Board.Name"),
+        'class -> "input-block-level"
+    )
+    @inputText(
+        boardForm("category"),
+        '_label -> Messages("Board.Category"),
+        'placeholder -> Messages("Board.Category"),
+        'class -> "input-block-level"
+    )
+</fieldset>
+
+<div class="control-group">
+    <div class="controls">
+        <input type="submit" class="btn btn-large btn-primary" value="@Messages("Create.Board")"/>
+    </div>
+</div>
+}
+</div>
+</div>
+}

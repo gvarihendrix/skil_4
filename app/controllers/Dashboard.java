@@ -1,8 +1,7 @@
 package controllers;
 
-import is.ru.honn.rupin.data.UserDataGateway;
-import is.ru.honn.rupin.domain.Login;
 import is.ru.honn.rupin.domain.User;
+import is.ru.honn.rupin.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import play.mvc.Controller;
@@ -21,10 +20,10 @@ public class Dashboard extends Controller {
 
     public static ApplicationContext dbctx = new
             FileSystemXmlApplicationContext("/conf/ApplicationContext.xml");
-    public static UserDataGateway userDataGateway = (UserDataGateway)dbctx.getBean("userDataGateway");
+    public static UserService userServiceData = (UserService) dbctx.getBean("userService");
 
     public static Result index() {
-        User loginUser = userDataGateway.getUserByEmail(request().username());
+        User loginUser = userServiceData.getUserByEmail(request().username());
         return ok(index.render(loginUser));
     }
 }

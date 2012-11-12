@@ -1,10 +1,9 @@
 package controllers;
 
-import is.ru.honn.rupin.data.UserDataGateway;
 import is.ru.honn.rupin.domain.Login;
-
 import is.ru.honn.rupin.domain.User;
 import is.ru.honn.rupin.domain.UserRegistration;
+import is.ru.honn.rupin.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import play.*;
@@ -15,9 +14,9 @@ import views.html.*;
 
 public class Application extends Controller {
 
-    public static ApplicationContext ctx = new
+    public static ApplicationContext dbctx = new
             FileSystemXmlApplicationContext("/conf/ApplicationContext.xml");
-    public static UserDataGateway userDataGateway = (UserDataGateway)ctx.getBean("userDataGateway");
+    public static UserService userServiceData = (UserService)dbctx.getBean("userService");
 
     public static Result index() {
         String email = ctx().session().get("email");
@@ -38,7 +37,7 @@ public class Application extends Controller {
             userform.reject("accept", "You must accept the terms and conditions");
         }
 
-        if (userDataGateway.getUserByEmail(userform.field("email").value()) != null) {
+        if (userServiceData.getUserByEmail(userform.field("email").value()) != null) {
             userform.reject("email", userform.field("email").value()+" belongs to an existing account");
         }
 
@@ -51,7 +50,7 @@ public class Application extends Controller {
         } else {
             User created = userform.get();
 
-            userDataGateway.addUser(created);
+            userServiceData.signup(created);
 
             session("email", userform.get().getEmail());
             return redirect(routes.Dashboard.index());

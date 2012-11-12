@@ -1,0 +1,54 @@
+@(user: is.ru.honn.rupin.domain.User,
+boardForm: Form[is.ru.honn.rupin.domain.Pin],
+boards: List[is.ru.honn.rupin.domain.Board])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(title = Messages("title.pin.add"), user) {
+<div class="row">
+    <div class="span6">
+        @form(action = routes.Pins.submitAdd(), 'class -> "form-horizontal") {
+        @if(boardForm.hasGlobalErrors) {
+        <p class="error">
+            <span class="label important">@boardForm.globalError.message</span>
+        </p>
+        }
+        <h2>@Messages("add.a.pin")</h2>
+        <fieldset>
+            @inputText(
+            boardForm("description"),
+            '_label -> Messages("Description"),
+            'placeholder -> Messages("Description"),
+            'class -> "input-block-level"
+            )
+            @inputText(
+            boardForm("link"),
+            '_label -> Messages("Link"),
+            'placeholder -> Messages("Link"),
+            'class -> "input-block-level"
+            )
+            @inputText(
+            boardForm("image"),
+            '_label -> Messages("Image"),
+            'placeholder -> Messages("Image"),
+            'class -> "input-block-level"
+            )
+            @select(
+                boardForm("boardId"),
+                boards.map{ t =>t.getId().toString -> (t.getName()) },
+                '_label -> Messages("Board.Name")
+            )
+        </fieldset>
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn btn-large btn-primary" value="@Messages("Add.Pin")"/>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+}
+
+@* boards.map{ t =>t.getId().toString -> (t.getName()) }  + ("" -> Messages("choose.board") ), *@

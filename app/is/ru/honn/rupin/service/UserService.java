@@ -1,6 +1,6 @@
 package is.ru.honn.rupin.service;
 
-import is.ru.honn.rupin.data.UserDataGateway;
+import is.ru.honn.rupin.data.User.UserDataGateway;
 import is.ru.honn.rupin.domain.User;
 
 /**
@@ -11,5 +11,7 @@ import is.ru.honn.rupin.domain.User;
 public interface UserService {
     public int signup(User user);
     public User login(String username, String password);
+    public User getUserByEmail(String email);
+    public User authenticate(String email, String password);
     public void setUserDataGateway(UserDataGateway userDataGateway);
 }

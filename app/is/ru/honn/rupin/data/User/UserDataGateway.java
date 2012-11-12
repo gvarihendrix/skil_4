@@ -1,4 +1,4 @@
-package is.ru.honn.rupin.data;
+package is.ru.honn.rupin.data.User;
 
 import is.ru.honn.rupin.domain.User;
 

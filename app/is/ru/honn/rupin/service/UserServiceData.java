@@ -1,6 +1,6 @@
 package is.ru.honn.rupin.service;
 
-import is.ru.honn.rupin.data.UserDataGateway;
+import is.ru.honn.rupin.data.User.UserDataGateway;
 import is.ru.honn.rupin.domain.User;
 
 /**
@@ -18,6 +18,16 @@ public class UserServiceData implements UserService {
     @Override
     public User login(String username, String password) {
         return this.userDataGateway.authenticate(username,password);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userDataGateway.getUserByEmail(email);
+    }
+
+    @Override
+    public User authenticate(String email, String password) {
+        return this.userDataGateway.authenticate(email, password);
     }
 
     @Override

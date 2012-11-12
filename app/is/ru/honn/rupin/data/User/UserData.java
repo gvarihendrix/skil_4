@@ -1,4 +1,4 @@
-package is.ru.honn.rupin.data;
+package is.ru.honn.rupin.data.User;
 
 import is.ru.honn.rupin.domain.User;
 import is.ruframework.data.RuData;
@@ -60,7 +60,7 @@ public class UserData extends RuData implements UserDataGateway {
                 new SimpleJdbcInsert(getDataSource())
                         .withTableName("ru_Users")
                         .usingGeneratedKeyColumns("id");
-        Map<String, Object> parameters = new HashMap<String, Object>(4);
+        Map<String, Object> parameters = new HashMap<String, Object>(3);
         parameters.put("email", user.getEmail());
         parameters.put("fullname", user.getFullname());
         parameters.put("password", user.getPassword());
