@@ -28,5 +28,12 @@ POST     /boards/create             controllers.Boards.submitCreate()
 GET      /pins/add                  controllers.Pins.add()
 POST     /pins/add                  controllers.Pins.submitAdd()
 
+# Users
+GET      /users                     controllers.Users.search()
+
+# Follow User
+POST     /user/:username/follow     controllers.Users.addFollow(username: String)
+POST     /user/:username/unfollow   controllers.Users.unFollow(username: String)
+
 # Map static resources from the /public folder to the /assets URL path
 GET      /assets/*file               controllers.Assets.at(path="/public", file)

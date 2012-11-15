@@ -20,6 +20,11 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class=""><a href="@routes.Application.index()">@Messages("Home")</a></li>
+                    @if(user != null ) {
+                    <li class=""><a href="@routes.Users.search()">@Messages("People")</a></li>
+                    <li class=""><a href="@routes.Boards.create()">@Messages("Create.Board")</a></li>
+                    <li class=""><a href="@routes.Pins.add()">@Messages("Add.Pin")</a></li>
+                    }
                 </ul>
             </div>
         </div>

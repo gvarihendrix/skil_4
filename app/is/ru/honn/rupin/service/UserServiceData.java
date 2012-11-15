@@ -1,7 +1,10 @@
 package is.ru.honn.rupin.service;
 
 import is.ru.honn.rupin.data.User.UserDataGateway;
+import is.ru.honn.rupin.domain.Follow;
 import is.ru.honn.rupin.domain.User;
+
+import java.util.List;
 
 /**
  * @author Jóhann
@@ -28,6 +31,26 @@ public class UserServiceData implements UserService {
     @Override
     public User authenticate(String email, String password) {
         return this.userDataGateway.authenticate(email, password);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return this.userDataGateway.getUsers();
+    }
+
+    @Override
+    public void addFollows(String username, String followUsername) {
+        this.userDataGateway.addFollows(username, followUsername);
+    }
+
+    @Override
+    public void unFollows(String username, String followUsername) {
+        this.userDataGateway.unFollows(username, followUsername);
+    }
+
+    @Override
+    public List<Follow> getFollowing(String username) {
+        return this.userDataGateway.getFollowing(username);
     }
 
     @Override

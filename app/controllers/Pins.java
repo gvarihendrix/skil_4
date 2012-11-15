@@ -14,7 +14,6 @@ import play.mvc.Result;
 import play.mvc.Security;
 import views.html.pins.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

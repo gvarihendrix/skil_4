@@ -8,11 +8,12 @@ CREATE TABLE ru_Users
 
 CREATE TABLE ru_Users_Follow
 (
-  user_id int NOT NULL,
-  follows_id int NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES ru_Users(id),
-  FOREIGN KEY (follows_id) REFERENCES ru_Users(id),
-  CHECK (user_id <> follows_id),
+  useremail varchar(255) NOT NULL,
+  follows varchar(255) NOT NULL,
+  primary key (useremail, follows),
+  FOREIGN KEY (useremail) REFERENCES ru_Users(email),
+  FOREIGN KEY (follows) REFERENCES ru_Users(email),
+  CHECK (useremail <> follows),
 )
 
 CREATE TABLE ru_Boards
@@ -23,14 +24,13 @@ CREATE TABLE ru_Boards
   created DATETIME,
   category varchar(255),
   FOREIGN KEY (creator) REFERENCES ru_Users(email)
---primary key (boardname, username)
 )
 
 CREATE TABLE ru_Pins
 (
   id int Identity (1, 1) primary key NOT NULL,
   board_id int NOT NULL,
-  creator varchar(255) NOT NULL, -- á ekki að þurfa þar sem borðið bendir á user, tvítaka gögn
+  creator varchar(255) NOT NULL, 
   created DATETIME,
   description varchar(1024),
   link varchar(512),
@@ -43,11 +43,11 @@ CREATE TABLE ru_Pins
 
 CREATE TABLE ru_Users_Pins_like
 (
-  user_id int NOT NULL,
+  useremail varchar(255) NOT NULL,
   pin_id int NOT NULL,
-  primary key (user_id, pin_id),
-  FOREIGN KEY (user_id) REFERENCES ru_Users(id),
-  FOREIGN KEY (pin_id) REFERENCES ru_Pins(id),
+  primary key (useremail, pin_id),
+  FOREIGN KEY (useremail) REFERENCES ru_Users(email),
+  FOREIGN KEY (pin_id) REFERENCES ru_Pins(id)
 )
 
 
@@ -56,7 +56,3 @@ DROP TABLE ru_Pins
 DROP TABLE ru_Boards
 DROP TABLE ru_Users_Follow
 DROP TABLE ru_Users
-
-select * from ru_Users
-select * from ru_Boards
-select * from ru_Pins

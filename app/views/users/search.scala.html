@@ -1,0 +1,47 @@
+@(user: is.ru.honn.rupin.domain.User,
+users: List[is.ru.honn.rupin.domain.FollowingUser])
+
+@import helper._
+
+@main(title = "People", user) {
+    <h2>People</h2>
+    @* TODO *@
+    <form class="form-search">
+        <div class="input-append">
+            <input type="text" class="span2 search-query">
+            <button type="submit" class="btn">Search by name</button>
+        </div>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Fullname</th>
+                <th>Email</th>
+                <th>Follow</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for(u <- users) {
+            <tr>
+                <td>@u.getFullname()</td>
+                <td>@u.getEmail()</td>
+                <td>
+                    @if(u.getEmail() != user.getEmail){
+                        @if(u.getFollow != null) {
+                            @form( action = routes.Users.unFollow(u.getEmail()), 'class -> "nomargin") {
+                                <input type="submit" value="Unfollow" class="btn btn-block btn-danger">
+                            }
+                        } else {
+                            @form( action = routes.Users.addFollow(u.getEmail()), 'class -> "nomargin") {
+                                <input type="submit" value="Follow" class="btn btn-block btn-success">
+                            }
+                        }
+                    } else {
+                        <button type="button" class="btn btn-block disabled" disabled="disabled">You</button>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
